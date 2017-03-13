@@ -1,0 +1,71 @@
+<div class="container">
+<!-- 	ROW 1: Title -->
+	<div class="row center_title">
+		<h1 class="text-success">Bet of the day <%= fa_icon "btc"%></h1>
+		<p>
+			1<i class="fa fa-btc" aria-hidden="true"></i> 
+			= <%= flash[:kraken]%> <i class="fa fa-eur" aria-hidden="true"></i>
+			(source: <a href="https://www.kraken.com/charts" target="_blank">kraken.com</a>)
+		</p>
+		<p>Time remaining before bet closes: 45 min</p>
+	</div>
+
+	<div class="row">
+	<!-- 	ROW 2: Bet explanation -->
+		<div class="row pad">
+			<div class="well">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, tempora, culpa. Assumenda perspiciatis deleniti provident magnam omnis. Quos minima quod distinctio, eveniet, porro pariatur quaerat atque repellendus nisi dolore doloribus?</div>
+		</div>
+	<!-- 	ROW 3: arrows up/down -->
+		<div class="row center_arrows">
+			<div class="col-xs-4">
+				<p><%= fa_icon "arrow-up 5x"%></p>
+				<p>12 <%= fa_icon "btc"%></p>
+				<form class="form-inline">
+					<div class="form-group">
+						<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+						<div class="input-group">
+							<div class="input-group-addon"><%= fa_icon "btc"%></div>
+							<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+							<div class="input-group-addon">BTC</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-xs-4">Total BTC in the pot: 34 <%= fa_icon "btc"%></div>
+			<div class="col-xs-4">
+				<p>22 <%= fa_icon "btc"%></p>
+				<p><%= fa_icon "arrow-down 5x"%></p>
+					<div class="form-group">
+						<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+						<div class="input-group">
+							<div class="input-group-addon"><%= fa_icon "btc"%></div>
+							<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+							<div class="input-group-addon">BTC</div>
+						</div>
+					</div>				
+			</div>
+		</div>			
+	</div>
+
+<!-- 	ROW 4: bet status -->
+	<div class="row center_title">
+		<h4 class="text-primary">Check your bet status</h4>
+		<p>Provide the bitcoin address you send the bet to</p>
+		<div class="input-group">
+			<input type="text" class="form-control" aria-label="...">
+			<div class="input-group-btn">
+			<!-- Buttons -->
+				<button type="button" class="btn btn-default" aria-label="Help">Check status</button>
+				<button type="button" class="btn btn-default" aria-label="Help">Bet +</button>
+			</div>
+		</div>
+	</div>
+<!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="">
+                <p>Copyright &copy; BetDay <%= Time.now.year%></p>
+            </div>
+        </div>
+    </footer>
+</div>
