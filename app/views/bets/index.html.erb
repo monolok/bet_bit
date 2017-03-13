@@ -26,11 +26,11 @@
 	</div>
 
 	<div class="row">
-<!-- 	ADD CODE FOR @bet.all.each do |bet| loop-->	
-		<div class="col-xs-6">
+<!-------------------------- When moving one to multiple bet loop HERE ------------------>	
+<!-- 		<div class="col-xs-6"> -->
 	<!-- 	ROW 2: Bet explanation -->
 		<div class="row pad">
-			<p>Bet closes in 45 min</p>
+			<p class="center_arrows">Bet closes in 45 min</p>
 			<div class="well">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, tempora, culpa. Assumenda perspiciatis deleniti provident magnam omnis. Quos minima quod distinctio.</div>
 		</div>
 	<!-- 	ROW 3: arrows up/down -->
@@ -61,16 +61,15 @@
 						</div>				
 				</div>
 			</div>			
-		</div>
-
+<!-- 		</div> -->
+<!-------------------------- END OF LOOP ------------------>	
 	</div>
 
 <!-- 	ROW 4: bet status -->
-	<div class="row center_title">
-		<h4 class="text-primary">Check your bet status</h4>
-		<p>Provide the bitcoin address you send the bet to</p>
+	<div class="row center_title pad_status">
+		<h4 class="text-primary">Check your bet status or bet more</h4>
 		<div class="input-group">
-			<input type="text" class="form-control" aria-label="...">
+			<input type="text" class="form-control" aria-label="..." placeholder="Write the BTC address you send the bet to">
 			<div class="input-group-btn">
 			<!-- Buttons -->
 				<button type="button" class="btn btn-default" aria-label="Help">Check status</button>
@@ -80,10 +79,10 @@
 	</div>
 <!-- Footer -->
     <footer>
-        <div class="row">
-            <div class="">
-                <p>Copyright &copy; BetDay <%= Time.now.year%></p>
-            </div>
+        <div class="row inline">
+         	<p>Copyright &copy; BetDay <%= Time.now.year%></p>
+         	<p>Support</p>
+         	<p>FAQ</p>
         </div>
     </footer>
 </div>
