@@ -1,50 +1,68 @@
 <div class="container">
 <!-- 	ROW 1: Title -->
 	<div class="row center_title">
-		<h1 class="text-success">Bet of the day <%= fa_icon "btc"%></h1>
-		<p>
-			1<i class="fa fa-btc" aria-hidden="true"></i> 
-			= <%= flash[:kraken]%> <i class="fa fa-eur" aria-hidden="true"></i>
-			(source: <a href="https://www.kraken.com/charts" target="_blank">kraken.com</a>)
-		</p>
-		<p>Time remaining before bet closes: 45 min</p>
+		<div class="row">
+			<h1 class="text-success">Bet of the day <%= fa_icon "btc"%></h1>
+			<p>
+				1<i class="fa fa-btc" aria-hidden="true"></i> 
+				= <%= flash[:kraken]%> <i class="fa fa-eur" aria-hidden="true"></i>
+				(source: <a href="https://www.kraken.com/charts" target="_blank">kraken.com</a>)
+			</p>			
+		</div>
+		<div class="row">
+			<div class="col-xs-4">
+				<%= fa_icon "user-secret 3x"%> 
+				<p>Anonymous</p>	
+			</div>
+			<div class="col-xs-4">
+				<%= fa_icon "user-times 3x"%>
+				<p>No account</p>
+			</div>
+			<div class="col-xs-4">
+				<%= fa_icon "arrows-v 3x"%>
+				<p>Simple</p>
+			</div>
+		</div>
 	</div>
 
 	<div class="row">
+<!-- 	ADD CODE FOR @bet.all.each do |bet| loop-->	
+		<div class="col-xs-6">
 	<!-- 	ROW 2: Bet explanation -->
 		<div class="row pad">
-			<div class="well">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, tempora, culpa. Assumenda perspiciatis deleniti provident magnam omnis. Quos minima quod distinctio, eveniet, porro pariatur quaerat atque repellendus nisi dolore doloribus?</div>
+			<p>Bet closes in 45 min</p>
+			<div class="well">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, tempora, culpa. Assumenda perspiciatis deleniti provident magnam omnis. Quos minima quod distinctio.</div>
 		</div>
 	<!-- 	ROW 3: arrows up/down -->
-		<div class="row center_arrows">
-			<div class="col-xs-4">
-				<p><%= fa_icon "arrow-up 5x"%></p>
-				<p>12 <%= fa_icon "btc"%></p>
-				<form class="form-inline">
-					<div class="form-group">
-						<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-						<div class="input-group">
-							<div class="input-group-addon"><%= fa_icon "btc"%></div>
-							<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-							<div class="input-group-addon">BTC</div>
+			<div class="row center_arrows">
+				<div class="col-xs-4">
+					<p><%= fa_icon "arrow-up 3x"%></p>
+					<p>12 <%= fa_icon "btc"%></p>
+					<form class="form-inline">
+						<div class="form-group">
+							<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+							<div class="input-group">
+								<div class="input-group-addon"><%= fa_icon "btc"%></div>
+								<input type="text" class="form-control" id="exampleInputAmount" placeholder="Bitcoins">
+							</div>
 						</div>
-					</div>
-				</form>
-			</div>
-			<div class="col-xs-4">Total BTC in the pot: 34 <%= fa_icon "btc"%></div>
-			<div class="col-xs-4">
-				<p>22 <%= fa_icon "btc"%></p>
-				<p><%= fa_icon "arrow-down 5x"%></p>
-					<div class="form-group">
-						<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-						<div class="input-group">
-							<div class="input-group-addon"><%= fa_icon "btc"%></div>
-							<input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
-							<div class="input-group-addon">BTC</div>
-						</div>
-					</div>				
-			</div>
-		</div>			
+					</form>
+				</div>
+				<div class="col-xs-4">Total BTC in the pot: 34 <%= fa_icon "btc"%></div>
+				<div class="col-xs-4">
+					<p>22 <%= fa_icon "btc"%></p>
+					<p><%= fa_icon "arrow-down 3x"%></p>
+						<div class="form-group">
+							<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+							<div class="input-group">
+								<div class="input-group-addon"><%= fa_icon "btc"%></div>
+								<input type="text" class="form-control" id="exampleInputAmount" placeholder="Bitcoins">
+							</div>
+						</div>				
+				</div>
+			</div>			
+		</div>
+
 	</div>
 
 <!-- 	ROW 4: bet status -->
