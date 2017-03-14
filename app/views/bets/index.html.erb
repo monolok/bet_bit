@@ -109,14 +109,16 @@
 			</thead>
 			<tbody>
 <!------------------------ LOOP ---------------------------->
+				<% @bets.each do |b|%>
 				<tr>
-					<th scope="row">1</th>
+					<th scope="row"><%= b.id%></th>
 					<td>12/02 - 12H30/12H45</td>
-					<td>1300 <%= fa_icon "eur"%></td>
+					<td><%= b.base_price%> <%= fa_icon "eur"%></td>
 					<td>1400 <%= fa_icon "eur"%></td>
 					<td>3.56 <%= fa_icon "btc"%></td>
 					<td>Active</td>
 				</tr>
+				<%end%>
 			</tbody>
 		</table>		
 	</div>
