@@ -26,58 +26,84 @@
 		</div>
 	</div>
 
-	<div class="row">
-<!-------------------------- When moving one to multiple bet loop HERE ------------------>	
-<!-- 		<div class="col-xs-6"> -->
-	<!-- 	ROW 2: Bet explanation -->
-		<div class="row pad">
-			<p class="center_arrows">Bet closes in 45 min</p>
-			<div class="well">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, tempora, culpa. Assumenda perspiciatis deleniti provident magnam omnis. Quos minima quod distinctio.</div>
-		</div>
-	<!-- 	ROW 3: arrows up/down -->
-			<div class="row center_arrows">
+<!-- 	ROW 2: current bet -->
+	<div class="row pad">
+		<div class="well center_arrows">
+		<h4><p class="text-warning">Current bet</p></h4>
+		hourglass-half
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, tempora, culpa. Assumenda perspiciatis deleniti provident magnam omnis. Quos minima quod distinctio.</div>
+	</div>
+
+<!-- 	ROW 3: Bet form -->
+	<div class="row pad center_arrows">
+		<div class="col-sm-6">
+			<div class="row">
+				<h4 class="text-primary">Bet on up or bet on down ?</h4>
+				<%# form_for :bet do |b| %>
+					<!-- <div class="input-group">
+						<div class="input-group-addon"><%# fa_icon "btc"%></div>
+						<%# b.number_field :first_name, class: "form-control", placeholder: "How many bitcoins to bet ?" %>
+					</div> -->
+				<%# end %>					
+			</div>
+			<div class="row">
 				<div class="col-xs-4">
 					<p><%= fa_icon "arrow-up 3x"%></p>
 					<p>12 <%= fa_icon "btc"%></p>
-					<form class="form-inline">
-						<div class="form-group">
-							<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-							<div class="input-group">
-								<div class="input-group-addon"><%= fa_icon "btc"%></div>
-								<input type="text" class="form-control" id="exampleInputAmount" placeholder="Bitcoins">
-							</div>
-						</div>
-					</form>
 				</div>
 				<div class="col-xs-4">Total BTC in the pot: 34 <%= fa_icon "btc"%></div>
 				<div class="col-xs-4">
 					<p>22 <%= fa_icon "btc"%></p>
 					<p><%= fa_icon "arrow-down 3x"%></p>
-						<div class="form-group">
-							<label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
-							<div class="input-group">
-								<div class="input-group-addon"><%= fa_icon "btc"%></div>
-								<input type="text" class="form-control" id="exampleInputAmount" placeholder="Bitcoins">
-							</div>
-						</div>				
 				</div>
-			</div>			
-<!-- 		</div> -->
-<!-------------------------- END OF LOOP ------------------>	
-	</div>
-
-<!-- 	ROW 4: bet status -->
-	<div class="row center_title pad_status">
-		<h4 class="text-primary">Check your bet status or bet more</h4>
-		<div class="input-group">
-			<input type="text" class="form-control" aria-label="..." placeholder="Write the BTC address you send the bet to">
-			<div class="input-group-btn">
-			<!-- Buttons -->
-				<button type="button" class="btn btn-default" aria-label="Help">Check status</button>
-				<button type="button" class="btn btn-default" aria-label="Help">Bet +</button>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<h4 class="text-primary">Check your bet status</h4>
+			<div class="input-group">
+				<input type="text" class="form-control" aria-label="..." placeholder="BTC address you send the bet to">
+				<div class="input-group-btn">
+					<!-- Buttons -->
+					<button type="button" class="btn btn-default" aria-label="Help">Check status</button>
+				</div>
 			</div>
 		</div>
 	</div>
+
+<!-- 	ROW 4: bet history -->
+	<div class="row pad">
+<!-- 		<h4 class="center_arrows"><p class="text-warning">Past bets</p></h4> -->
+		<table class="table table-striped">
+			<thead> 
+				<tr>
+					<th>#</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Username</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">1</th>
+					<td>Mark</td>
+					<td>Otto</td>
+					<td>@mdo</td>
+				</tr>
+				<tr>
+					<th scope="row">2</th>
+					<td>Jacob</td> <td>Thornton</td>
+					<td>@fat</td>
+				</tr>
+				<tr>
+					<th scope="row">3</th>
+					<td>Larry</td>
+					<td>the Bird</td>
+					<td>@twitter</td>
+				</tr>
+			</tbody>
+		</table>		
+	</div>
+
 <!-- Footer -->
     <footer>
         <div class="row inline">
