@@ -125,17 +125,35 @@
     <footer>
         <div class="row inline">
          	<p>Copyright &copy; BetDay <%= Time.now.year%></p>
-         	<p>Contact</p>
-         	<p>FAQ</p>
+         	<p class="click" data-toggle="modal" data-target=".bs-example-modal-sm1">Contact</p>
+         	<p class="click" data-toggle="modal" data-target=".bs-example-modal-sm2">FAQ</p>
         </div>
     </footer>
 </div>
 
-<!-- Small modal -->
+<!-- Small modal How it works ? -->
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
-      ...
+      HOW
+    </div>
+  </div>
+</div>
+
+<!-- Small modal contact form-->
+<div class="modal fade bs-example-modal-sm1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      Contact form
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="modal fade bs-example-modal-sm2" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      FAQ
     </div>
   </div>
 </div>
