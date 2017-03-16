@@ -5,7 +5,8 @@
 			<h1 class="text-success">Bitcoin betting <%= fa_icon "btc"%></h1>
 			<p>
 				1<i class="fa fa-btc" aria-hidden="true"></i> 
-				= <%= flash[:kraken]%> <i class="fa fa-eur" aria-hidden="true"></i>
+				= <span id="kraken_btc_eur">test<%# @kraken_btc_eur%></span> 
+				<i class="fa fa-eur" aria-hidden="true"></i>
 				(source: <a href="https://www.kraken.com/charts" target="_blank">kraken.com</a>)
 			</p>
 			<h4 class="click" data-toggle="modal" data-target=".bs-example-modal-sm"><mark>Betting with my bitcoins, how it works ?</mark></h4>		

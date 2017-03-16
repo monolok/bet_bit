@@ -15,3 +15,36 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+
+jQuery(document).ready(function () {
+
+	// $('#kraken_btc_eur').click(function(){
+	// 	$.get('https://api.kraken.com/0/public/Ticker?pair=XXBTZEUR', function(data){
+	// 		var kraken_btc_eur = data.result.XXBTZEUR.c[0]
+	// 		$("#kraken_btc_eur").html("<p>"+kraken_btc_eur+"</p>");
+	// 		// console.log(data.result.XXBTZEUR.c[0]);
+	// 	})
+	// });
+	 
+
+
+
+	 
+	// setInterval(function(){ 
+	// 	$.get('https://api.kraken.com/0/public/Ticker?pair=XXBTZEUR', function(data){
+	// 		var kraken_btc_eur = data.result.XXBTZEUR.c[0];
+	// 		$("#kraken_btc_eur").html("<p>"+kraken_btc_eur+"</p>");
+	// }, 3000);
+
+
+	// });
+
+
+
+
+
+
+
+
+	});
