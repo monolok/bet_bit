@@ -5,7 +5,7 @@
 			<h1 class="text-success">Bitcoin betting <%= fa_icon "btc"%></h1>
 			<p>
 				1<i class="fa fa-btc" aria-hidden="true"></i> 
-				= <span id="kraken_btc_eur">test<%# @kraken_btc_eur%></span> 
+				= <span class="kraken_btc_eur"><%# @kraken_btc_eur%></span> 
 				<i class="fa fa-eur" aria-hidden="true"></i>
 				(source: <a href="https://www.kraken.com/charts" target="_blank">kraken.com</a>)
 			</p>
@@ -43,7 +43,7 @@
 					<p>base price</p>					
 				</div>
 				<div class="col-xs-3">
-					<h3>1245.56 <%= fa_icon "eur"%></h3>
+					<h3><span class="kraken_btc_eur"><%# @kraken_btc_eur%></span> <%= fa_icon "eur"%></h3>
 					<p>current price</p>					
 				</div>
 				<div class="col-xs-3">
@@ -68,7 +68,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-4 text-success">
-					<p><%= fa_icon "arrow-up 3x"%></p>
+					<p class="click"><%= fa_icon "arrow-up 3x"%></p>
 					<p>12 <%= fa_icon "btc"%></p>
 				</div>
 				<div class="col-xs-4">
@@ -77,7 +77,7 @@
 				</div>
 				<div class="col-xs-4 text-danger">
 					<p>22 <%= fa_icon "btc"%></p>
-					<p><%= fa_icon "arrow-down 3x"%></p>
+					<p class="click"><%= fa_icon "arrow-down 3x"%></p>
 				</div>
 			</div>
 		</div>
