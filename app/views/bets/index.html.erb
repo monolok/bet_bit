@@ -108,17 +108,18 @@
 					<th>Status</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="list_of_bets">
 <!------------------------ LOOP ---------------------------->
-				<% @bets.each do |b|%>
+				<% @bets.each do |bet|%>
 					<tr>
-						<th scope="row"><%= b.id%></th>
+						<th scope="row"><%= bet.id%></th>
 						<td>12/02 - 12H30/12H45</td>
-						<td><%= b.base_price%> <%= fa_icon "eur"%></td>
+						<td><%= bet.base_price%> <%= fa_icon "eur"%></td>
 						<td>1400 <%= fa_icon "eur"%></td>
 						<td>3.56 <%= fa_icon "btc"%></td>
 						<td>Active</td>
 					</tr>
+<!------------------------ END LOOP ------------------------>
 				<%end%>
 			</tbody>
 		</table>		

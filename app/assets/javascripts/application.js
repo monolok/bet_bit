@@ -21,17 +21,46 @@ $(document).ready(function(){
     var kraken_btc_eur_old = 0;
 
     setInterval(function(){
+
         $.get('https://api.kraken.com/0/public/Ticker?pair=XXBTZEUR', function(data){
+
             var kraken_btc_eur = data.result.XXBTZEUR.c[0];
+
             if (kraken_btc_eur_old > kraken_btc_eur) {
                 // Change css
                 $(".kraken_btc_eur").css('color', 'red').text(kraken_btc_eur);
             } else {
                 $(".kraken_btc_eur").css('color', 'green').text(kraken_btc_eur);            	
             }
+
             kraken_btc_eur_old = kraken_btc_eur;
             $(".kraken_btc_eur").text(kraken_btc_eur);
+
         });
-    }, 1000);
+
+        $.ajax({
+          type: "POST",
+          url: "/bets",
+          data: { parameter: kraken_btc_eur_old },
+          success: function (data) {
+            var newBet = "<div>" + data.base_price + "</div>";
+            $('.list_of_bets').append(newBet);
+           }        
+        });
+
+    }, 10000);
    
 });
+
+// var xhr = new XMLHttpRequest();
+// xhr.open("GET", "bets", true);
+// xhr.onreadystatechange = function () {
+//     if (xhr.readyState == 4) {
+//     var parser = new DOMParser();
+//     var xmlDoc = parser.parseFromString(xhr.responseText,"text/xml");
+//     console.log(xmlDoc);
+//     }
+// }
+
+// xhr.send();
+
