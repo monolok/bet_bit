@@ -38,29 +38,62 @@ $(document).ready(function(){
 
         });
 
+    }, 2000);
+   
+
+
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.text(minutes + ":" + seconds);
+
+            if (--timer < 0) {
+                timer = duration;
+            }
+        }, 1000);
+    };
+
+    jQuery(function ($) {
+        var fiveMinutes = 60 * 5,
+            display = $('#counter');
+        startTimer(fiveMinutes, display);
+    });
+
+    setInterval(function(){
+
         $.ajax({
           type: "POST",
           url: "/bets",
           data: { parameter: kraken_btc_eur_old },
           success: function (data) {
-            var newBet = "<div>" + data.base_price + "</div>";
-            $('.list_of_bets').append(newBet);
-           }        
+            //bets history table updated
+            $("#bet_loop").append("<tr id='bet_" + data.id + "'><th id='data_id'>" + data.id + "</th></tr>");
+            $("#bet_" + data.id + "").append("<td id='data_date'>" + data.created_at + "</td>");
+            $("#bet_" + data.id + "").append("<td id='data_base_price'>" + data.base_price + "</td>");
+            $("#bet_" + data.id + "").append("<td class='kraken_btc_eur'></td>");
+            
+            //current bet updated
+            $("#current_bet_id").html(data.id);
+            $("#current_bet_base_price").html(data.base_price);
+
+            var counter_bets = document.getElementById("bet_loop").getElementsByTagName("th").length;
+            var remove_id = data.id - 5;
+            //logic
+            if (counter_bets > 5) {
+                //removing oldest bet from bets hostory
+                $("tr").remove("#bet_" + remove_id);
+            };
+           } // end of AJAX success call       
         });
 
-    }, 10000);
-   
+
+    }, 5000);
+
+
 });
-
-// var xhr = new XMLHttpRequest();
-// xhr.open("GET", "bets", true);
-// xhr.onreadystatechange = function () {
-//     if (xhr.readyState == 4) {
-//     var parser = new DOMParser();
-//     var xmlDoc = parser.parseFromString(xhr.responseText,"text/xml");
-//     console.log(xmlDoc);
-//     }
-// }
-
-// xhr.send();
-

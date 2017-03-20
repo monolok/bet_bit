@@ -11,8 +11,8 @@ class BetsController < ApplicationController
   	@bet.save  
   	Bet.first.destroy
 
-  	@bets = Bet.all
-  	@bet_last = Bet.last
+  	#@bets = Bet.all
+  	#@bet_last = Bet.last
 	
 	render json: @bet
 	#render :js => "window.location = '#{root_path}'"

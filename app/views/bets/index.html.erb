@@ -35,11 +35,11 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-3">
-					<h3><%= @bet_last.id%></h3>
+					<h3 id="current_bet_id"><%#= @bet_last.id%></h3>
 					<p>id</p>
 				</div>
 				<div class="col-xs-3">
-					<h3><%= @bet_last.base_price%> <%= fa_icon "eur"%></h3>
+					<h3 id="current_bet_base_price"><%#= @bet_last.base_price%> <%= fa_icon "eur"%></h3>
 					<p>base price</p>					
 				</div>
 				<div class="col-xs-3">
@@ -47,7 +47,7 @@
 					<p>current price</p>					
 				</div>
 				<div class="col-xs-3">
-					<h3>43 sec</h3>
+					<h3 id="counter"></h3>
 					<p>to end</p>					
 				</div>
 			</div>
@@ -108,19 +108,19 @@
 					<th>Status</th>
 				</tr>
 			</thead>
-			<tbody class="list_of_bets">
+			<tbody id="bet_loop">
 <!------------------------ LOOP ---------------------------->
-				<% @bets.each do |bet|%>
-					<tr>
-						<th scope="row"><%= bet.id%></th>
+				<%# @bets.each do |bet|%>
+<!-- 				<tr>
+						<th scope="row"><%#= bet.id%></th>
 						<td>12/02 - 12H30/12H45</td>
-						<td><%= bet.base_price%> <%= fa_icon "eur"%></td>
-						<td>1400 <%= fa_icon "eur"%></td>
-						<td>3.56 <%= fa_icon "btc"%></td>
+						<td><%#= bet.base_price%> <%#= fa_icon "eur"%></td>
+						<td>1400 <%#= fa_icon "eur"%></td>
+						<td>3.56 <%#= fa_icon "btc"%></td>
 						<td>Active</td>
-					</tr>
+					</tr> -->
 <!------------------------ END LOOP ------------------------>
-				<%end%>
+				<%#end%>
 			</tbody>
 		</table>		
 	</div>
