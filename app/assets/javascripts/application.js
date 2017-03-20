@@ -18,6 +18,8 @@
 
 
 $(document).ready(function(){
+
+    //get ticker API kraken
     var kraken_btc_eur_old = 0;
 
     setInterval(function(){
@@ -40,8 +42,7 @@ $(document).ready(function(){
 
     }, 2000);
    
-
-
+    //Set timer before bet end
     function startTimer(duration, display) {
         var timer = duration, minutes, seconds;
         setInterval(function () {
@@ -65,6 +66,7 @@ $(document).ready(function(){
         startTimer(fiveMinutes, display);
     });
 
+    //AJAX call to create new bet every x time
     setInterval(function(){
 
         $.ajax({
@@ -103,7 +105,7 @@ $(document).ready(function(){
         });
 
 
-    }, 60000);
+    }, 5000);
 
 
 });

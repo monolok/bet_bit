@@ -8,9 +8,10 @@ class BetsController < ApplicationController
   def create
   	@bet = Bet.new
   	@bet.base_price = params["parameter"]
-  	@bet.save  
-  	Bet.first.destroy
-
+  	@bet.save
+  	if Bet.all.count > 10  
+  		Bet.first.destroy
+  	end
   	#@bets = Bet.all
   	#@bet_last = Bet.last
 	
