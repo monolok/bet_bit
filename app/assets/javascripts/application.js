@@ -17,3 +17,27 @@
 //= require_tree .
 
 
+$(document).ready(function(){
+    var kraken_btc_eur_old = 0;
+
+    setInterval(function(){
+
+        $.get('https://api.kraken.com/0/public/Ticker?pair=XXBTZEUR', function(data){
+
+            var kraken_btc_eur = data.result.XXBTZEUR.c[0];
+
+            if (kraken_btc_eur_old > kraken_btc_eur) {
+                // Change css
+                $(".kraken_btc_eur").css('color', 'red').text(kraken_btc_eur);
+            } else {
+                $(".kraken_btc_eur").css('color', 'green').text(kraken_btc_eur);            	
+            }
+
+            kraken_btc_eur_old = kraken_btc_eur;
+            $(".kraken_btc_eur").text(kraken_btc_eur);
+
+        });
+
+    }, 2000);
+
+});
