@@ -73,10 +73,20 @@ $(document).ready(function(){
           data: { parameter: kraken_btc_eur_old },
           success: function (data) {
             //bets history table updated
-            $("#bet_loop").append("<tr id='bet_" + data.id + "'><th id='data_id'>" + data.id + "</th></tr>");
-            $("#bet_" + data.id + "").append("<td id='data_date'>" + data.created_at + "</td>");
-            $("#bet_" + data.id + "").append("<td id='data_base_price'>" + data.base_price + "</td>");
-            $("#bet_" + data.id + "").append("<td class='kraken_btc_eur'></td>");
+            if (document.getElementById("bet_loop").children.length > 0 ) {
+                $("#bet_loop").prepend("<tr id='bet_" + data.id + "'><th id='data_id'>" + data.id + "</th></tr>");
+                $("#bet_" + data.id + "").append("<td id='data_date'>" + data.created_at + "</td>");
+                $("#bet_" + data.id + "").append("<td id='data_base_price'>" + data.base_price + "</td>");
+                $("#bet_" + data.id + "").append("<td class='kraken_btc_eur'></td>");
+            
+            } else {
+
+                $("#bet_loop").append("<tr id='bet_" + data.id + "'><th id='data_id'>" + data.id + "</th></tr>");
+                $("#bet_" + data.id + "").append("<td id='data_date'>" + data.created_at + "</td>");
+                $("#bet_" + data.id + "").append("<td id='data_base_price'>" + data.base_price + "</td>");
+                $("#bet_" + data.id + "").append("<td class='kraken_btc_eur'></td>");
+            };
+
             
             //current bet updated
             $("#current_bet_id").html(data.id);
@@ -93,7 +103,7 @@ $(document).ready(function(){
         });
 
 
-    }, 5000);
+    }, 60000);
 
 
 });
