@@ -1,3 +1,7 @@
+require 'block_io'
+BlockIo.set_options :api_key=> '6b38-5f0e-3058-24c2', :pin => 'SECRET PIN', :version => 2
+
+
 desc "New/close/clean bets (cron: 5 min)"
 task :bet => :environment do
 	
@@ -29,4 +33,10 @@ task :bet => :environment do
   	puts "no bet deleted, < 10 bets"
   end
 
+end
+
+
+desc "testing btc address create"
+task :btc => :environment do 
+	BlockIo.get_new_address(:label => 'shibe1')
 end

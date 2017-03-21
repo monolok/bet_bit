@@ -58,17 +58,11 @@
 	<div class="row pad center_arrows">
 		<div class="col-sm-6">
 			<div class="row">
-				<h4 class="text-primary">Bet on up or bet on down ?</h4>
-				<%# form_for :bet do |b| %>
-					<!-- <div class="input-group">
-						<div class="input-group-addon"><%# fa_icon "btc"%></div>
-						<%# b.number_field :first_name, class: "form-control", placeholder: "How many bitcoins to bet ?" %>
-					</div> -->
-				<%# end %>					
+				<h4 class="text-primary">Bet on up or bet on down ?</h4>					
 			</div>
 			<div class="row">
 				<div class="col-xs-4 text-success">
-					<p class="click"><%= fa_icon "arrow-up 3x"%></p>
+					<p id="arrow_up" class="click" data-toggle="modal" data-target=".bs-example-modal-sm3"><%= fa_icon "arrow-up 3x"%></p>
 					<p>12 <%= fa_icon "btc"%></p>
 				</div>
 				<div class="col-xs-4">
@@ -77,17 +71,17 @@
 				</div>
 				<div class="col-xs-4 text-danger">
 					<p>22 <%= fa_icon "btc"%></p>
-					<p class="click"><%= fa_icon "arrow-down 3x"%></p>
+					<p id="arrow_down" class="click" data-toggle="modal" data-target=".bs-example-modal-sm4"><%= fa_icon "arrow-down 3x"%></p>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-6">
 			<h4 class="text-primary">Check your bet status</h4>
 			<div class="input-group">
-				<input type="text" class="form-control" aria-label="..." placeholder="BTC address you send the bet to">
+				<input id="btc_address_status" type="text" class="form-control" aria-label="..." placeholder="BTC address you send the bet to">
 				<div class="input-group-btn">
 					<!-- Buttons -->
-					<button type="button" class="btn btn-default" aria-label="Help">Check status</button>
+					<button id="bet_status" type="button" class="btn btn-default" aria-label="Help">Check status</button>
 				</div>
 			</div>
 		</div>
@@ -96,7 +90,6 @@
 <!-- 	ROW 4: bet history -->
 	<div class="row pad">
 		<p>Prize fee: 5%</p>
-<!-- 		<h4 class="center_arrows"><p class="text-warning">Past bets</p></h4> -->
 		<table class="table table-striped">
 			<thead> 
 				<tr>
@@ -164,6 +157,24 @@
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       FAQ
+    </div>
+  </div>
+</div>
+
+<!-- Arrow up -->
+<div class="modal fade bs-example-modal-sm3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      Arrow up
+    </div>
+  </div>
+</div>
+
+<!-- Arrow down -->
+<div class="modal fade bs-example-modal-sm4" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      Arrow down
     </div>
   </div>
 </div>
