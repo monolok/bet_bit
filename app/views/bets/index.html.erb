@@ -62,7 +62,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-4 text-success">
-					<p id="arrow_up" class="click" data-toggle="modal" data-target=".bs-example-modal-sm3"><%= fa_icon "arrow-up 3x"%></p>
+					<p class="click" data-toggle="modal" data-target=".bs-example-modal-sm3"><%= fa_icon "arrow-up 3x"%></p>
 					<p>12 <%= fa_icon "btc"%></p>
 				</div>
 				<div class="col-xs-4">
@@ -71,7 +71,7 @@
 				</div>
 				<div class="col-xs-4 text-danger">
 					<p>22 <%= fa_icon "btc"%></p>
-					<p id="arrow_down" class="click" data-toggle="modal" data-target=".bs-example-modal-sm4"><%= fa_icon "arrow-down 3x"%></p>
+					<p class="click" data-toggle="modal" data-target=".bs-example-modal-sm4"><%= fa_icon "arrow-down 3x"%></p>
 				</div>
 			</div>
 		</div>
@@ -164,8 +164,17 @@
 <!-- Arrow up -->
 <div class="modal fade bs-example-modal-sm3" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      Arrow up
+    <div id="arrow_up_btc" class="modal-content pad">
+    	<p class="bg-warning">Bitcoin sent will be bet on UP</p>
+
+		<h6 class="text-primary center_arrows">Enter the Bitcoin address where you would like to receive your winnings</h6>
+		<div class="input-group">
+			<input id="client_btc_address" type="text" class="form-control" aria-label="..." placeholder="Bitcoin address">
+			<div class="input-group-btn">
+				<!-- Buttons -->
+				<button id="bet_up" type="button" class="btn btn-default" aria-label="Help">Bet Up</button>
+			</div>
+		</div>				
     </div>
   </div>
 </div>
@@ -173,8 +182,17 @@
 <!-- Arrow down -->
 <div class="modal fade bs-example-modal-sm4" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      Arrow down
+    <div id="arrow_down_btc" class="modal-content pad">
+    	<p class="bg-warning">Bitcoin sent will be bet on DOWN</p>
+
+		<h6 class="text-primary center_arrows">Enter the Bitcoin address where you would like to receive your winnings</h6>
+		<div class="input-group">
+			<input id="client_btc_address" type="text" class="form-control" aria-label="..." placeholder="Bitcoin address">
+			<div class="input-group-btn">
+				<!-- Buttons -->
+				<button id="bet_down" type="button" class="btn btn-default" aria-label="Help">Bet Down</button>
+			</div>
+		</div>				
     </div>
   </div>
 </div>
