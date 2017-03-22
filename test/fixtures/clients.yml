@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bet_address: MyString
+  client_address: MyString
+  bet_id: 1
+  status: MyString
+  up: false
+  down: false
+
+two:
+  bet_address: MyString
+  client_address: MyString
+  bet_id: 1
+  status: MyString
+  up: false
+  down: false
