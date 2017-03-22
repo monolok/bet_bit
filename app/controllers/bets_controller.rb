@@ -29,7 +29,7 @@ BlockIo.set_options :api_key=> '6b38-5f0e-3058-24c2', :pin => 'SECRET PIN', :ver
   	@client.bet_id = Bet.last.id
   	@client.down = true
   	@client.save
-	@bet_address = BlockIo.get_new_address(:label => "#{@client.id}")
+	  @bet_address = BlockIo.get_new_address(:label => "#{@client.id}")
   	@client.update(bet_address: @bet_address["data"]["address"])
 
   	#When payment received update status to true

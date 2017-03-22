@@ -58,7 +58,7 @@ $(document).ready(function(){
             success: function (data) {
                 $("#arrow_up_btc").empty();
                 $("#arrow_up_btc").append("<p>Winning funds will be send to:" + client_btc_address_up + "</p>");
-                //$("#arrow_up_btc").append("<p>Send your bet to:" + data["data"].address + "</p>");
+                $("#arrow_up_btc").append("<p>Send your bet to:" + data.bet_address + "</p>");
             }
         });
     });
@@ -72,7 +72,7 @@ $(document).ready(function(){
             success: function (data) {
                 $("#arrow_down_btc").empty();
                 $("#arrow_down_btc").append("<p>Winning funds will be send to:" + client_btc_address_down + "</p>");
-                //$("#arrow_down_btc").append("<p>Send your bet to:" + data["data"].address + "</p>");
+                $("#arrow_down_btc").append("<p>Send your bet to:" + data.bet_address + "</p>");
             }
         });
     });
