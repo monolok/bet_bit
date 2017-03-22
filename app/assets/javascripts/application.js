@@ -50,28 +50,28 @@ $(document).ready(function(){
 
 //Client clicking the Arrow up
     $( "#bet_up" ).click(function() {
-        var client_btc_address = document.getElementById("client_btc_address").value;
+        var client_btc_address_up = document.getElementById("client_btc_address_up").value;
         $.ajax({
             type: "GET",
             url: "/up",
-            data: { parameter: client_btc_address },
+            data: { parameter: client_btc_address_up },
             success: function (data) {
                 $("#arrow_up_btc").empty();
-                $("#arrow_up_btc").append("<p>Winning funds will be send to:" + client_btc_address + "</p>");
+                $("#arrow_up_btc").append("<p>Winning funds will be send to:" + client_btc_address_up + "</p>");
                 //$("#arrow_up_btc").append("<p>Send your bet to:" + data["data"].address + "</p>");
             }
         });
     });
 //Client clicking the Arrow down
     $( "#bet_down" ).click(function() {
-        var client_btc_address = document.getElementById("client_btc_address").value;
+        var client_btc_address_down = document.getElementById("client_btc_address_down").value;
         $.ajax({
             type: "GET",
             url: "/down",
-            data: { parameter: client_btc_address },
+            data: { parameter: client_btc_address_down },
             success: function (data) {
                 $("#arrow_down_btc").empty();
-                $("#arrow_down_btc").append("<p>Winning funds will be send to:" + client_btc_address + "</p>");
+                $("#arrow_down_btc").append("<p>Winning funds will be send to:" + client_btc_address_down + "</p>");
                 //$("#arrow_down_btc").append("<p>Send your bet to:" + data["data"].address + "</p>");
             }
         });

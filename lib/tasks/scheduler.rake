@@ -14,7 +14,12 @@ task :bet => :environment do
 	puts "closing bet..."
 	if Bet.all.count > 4
 		@bet_to_close_id = (Bet.last.id) - 3
-		@bet_to_close = Bet.update(@bet_to_close_id, last_price: @kraken_btc_eur, status: "Closed")
+		@bet_to_close = Bet.find(@bet_to_close_id)
+		if @kraken_btc_eur > @bet_to_close.base_price 
+			@bet_to_close.update(last_price: @kraken_btc_eur, status: "Closed", result: "up")
+		else
+			@bet_to_close.update(last_price: @kraken_btc_eur, status: "Closed", result: "down")
+		end
 		puts "bet closed."
 	else
 		puts "no bet to close."

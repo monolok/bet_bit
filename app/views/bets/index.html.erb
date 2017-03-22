@@ -110,9 +110,13 @@
 					<td><%= bet.base_price%> <%= fa_icon "eur"%></td>
 
 					<% if bet.last_price.nil?%>
-						<td class="kraken_btc_eur"> <%= fa_icon "eur"%></td>
+						<td><span class="kraken_btc_eur"></span> <%= fa_icon "eur"%></td>
 					<%else%>
-						<td><%= bet.last_price%> <%= fa_icon "eur"%></td>
+						<%if bet.result == "up"%>
+							<td><%= bet.last_price%> <%= fa_icon "eur"%> <%= fa_icon "arrow-up", class: "Active"%></td>
+						<%else%>
+							<td><%= bet.last_price%> <%= fa_icon "eur"%> <%= fa_icon "arrow-down", class: "Closed"%></td>
+						<%end%>
 					<%end%>
 					
 					<td>total btc bet <%= fa_icon "btc"%></td>
@@ -169,7 +173,7 @@
 
 		<h6 class="text-primary center_arrows">Enter the Bitcoin address where you would like to receive your winnings</h6>
 		<div class="input-group">
-			<input id="client_btc_address" type="text" class="form-control" aria-label="..." placeholder="Bitcoin address">
+			<input id="client_btc_address_up" type="text" class="form-control" aria-label="..." placeholder="Bitcoin address">
 			<div class="input-group-btn">
 				<!-- Buttons -->
 				<button id="bet_up" type="button" class="btn btn-default" aria-label="Help">Bet Up</button>
@@ -187,7 +191,7 @@
 
 		<h6 class="text-primary center_arrows">Enter the Bitcoin address where you would like to receive your winnings</h6>
 		<div class="input-group">
-			<input id="client_btc_address" type="text" class="form-control" aria-label="..." placeholder="Bitcoin address">
+			<input id="client_btc_address_down" type="text" class="form-control" aria-label="..." placeholder="Bitcoin address">
 			<div class="input-group-btn">
 				<!-- Buttons -->
 				<button id="bet_down" type="button" class="btn btn-default" aria-label="Help">Bet Down</button>
