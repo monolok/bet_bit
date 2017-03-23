@@ -1,7 +1,7 @@
 class BetsController < ApplicationController
 
 require 'block_io'
-BlockIo.set_options :api_key=> '6b38-5f0e-3058-24c2', :pin => 'SECRET PIN', :version => 2  
+BlockIo.set_options :api_key=> '6b38-5f0e-3058-24c2', :pin => 'toines2875', :version => 2  
 
   def index
   	@bets = Bet.all.order( 'id DESC' )
