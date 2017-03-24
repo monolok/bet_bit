@@ -1,5 +1,26 @@
 require 'block_io'
-BlockIo.set_options :api_key=> '6b38-5f0e-3058-24c2', :pin => 'toines2875', :version => 2  
+BlockIo.set_options :api_key=> 'bccd-bae8-44bc-a249', :pin => 'toines2875', :version => 2  
+
+
+# desc "testing"
+# task :bet => :environment do
+# 	@bet_to_test = Bet.last
+# 	i = 0
+# 	while i < @bet_to_test.clients.count do
+# 		balance = BlockIo.get_address_balance :addresses => @bet_to_test.clients[i].bet_address
+# 		if balance["data"]["available_balance"].to_f > 0 || balance["data"]["pending_received_balance"].to_f > 0
+# 			puts "Client #{@bet_to_test.clients[i].id} status needs an update"
+# 		end
+# 		i+=1
+# 	end
+# 	puts "testing done."
+# end
+
+
+
+####################SET MINIMUM BET, network fee + comm
+
+
 
 desc "New/close/clean bets (cron: 5 min)"
 task :bet => :environment do
@@ -28,7 +49,7 @@ task :bet => :environment do
 			end
 			i+=1
 		end
-		puts "clients status updated."
+		puts "clients status updated from bet #{@bet_to_update_clients.id}."
 	else
 		puts "no bet with clients to update."
 	end
@@ -56,8 +77,9 @@ task :bet => :environment do
 			puts "no loosers"
 			i = 0
 			#if no loosers refund each winner
-			while i < @winners.count
-				balance = BlockIo.get_address_balance :addresses => @winners[i].bet_address
+			while i < @winners.count 
+				balance_hash = BlockIo.get_address_balance :addresses => @winners[i].bet_address
+				balance = balance_hash["data"]["available_balance"].to_f
 				BlockIo.withdraw :amounts => "#{balance}", :to_addresses => "#{@winners[i].client_address}"
 				i+=1
 				puts "refunding #{balance} to client #{@winners[i].id}"
@@ -69,8 +91,9 @@ task :bet => :environment do
 			i = 0
 			@funds_loosers = Array.new
 			while i < @loosers.count
-				balance = BlockIo.get_address_balance :addresses => @loosers[i].bet_address
-				balance << @funds_loosers
+				balance_hash = BlockIo.get_address_balance :addresses => @loosers[i].bet_address
+				balance = balance_hash["data"]["available_balance"].to_f
+				@funds_loosers << balance
 				i+=1
 			end
 			@loosers_sum = @funds_loosers.inject(:+)
@@ -81,7 +104,8 @@ task :bet => :environment do
 			@funds_winners = Hash.new
 			@win_sum = Array.new
 			while y < @winners.count
-				balance = BlockIo.get_address_balance :addresses => @winners[y].bet_address
+				balance_hash = BlockIo.get_address_balance :addresses => @winners[y].bet_address
+				balance = balance_hash["data"]["available_balance"].to_f
 				@funds_winners["@winners[y].id"] = balance
 				@win_sum << balance
 				y+=1
@@ -92,7 +116,8 @@ task :bet => :environment do
 			#pay out winners based on % of their bet
 			z = 0
 			while z < @winners.count
-				won = (@funds_winners.key(@winners[z].id) / @winners_sum) * @loosers_sum
+				won = (@funds_winners.key(@winners[z].id).to_f / @winners_sum) * @loosers_sum
+				puts "paying #{won} to #{@winners[z].client_address}"
 				BlockIo.withdraw :amounts => "#{won}", :to_addresses => "#{@winners[z].client_address}"
 				z+=1
 			end
@@ -117,6 +142,5 @@ task :bet => :environment do
   	else
   		puts "no bet deleted, < 10 bets."
   	end
-
 #end of task
 end
