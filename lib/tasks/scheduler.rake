@@ -18,7 +18,7 @@ BlockIo.set_options :api_key=> 'bccd-bae8-44bc-a249', :pin => 'toines2875', :ver
 
 
 
-####################SET MINIMUM BET, network fee + comm
+####################SET MINIMUM BET, network fee + comm + GIT IGNORE FOR ENV DATA
 
 
 
