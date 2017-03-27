@@ -1,0 +1,102 @@
+  [1m[35m (127.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "db/test"[0m
+  [1m[35m (346.5ms)[0m  [1m[35mCREATE DATABASE "db/test" ENCODING = 'utf8'[0m
+  [1m[35mSQL (5.7ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (29.7ms)[0m  [1m[35mCREATE TABLE "bets" ("id" serial primary key, "base_price" decimal, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "last_price" decimal, "status" character varying, "result" character varying)[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "clients" ("id" serial primary key, "bet_address" character varying, "client_address" character varying, "bet_id" integer, "status" boolean DEFAULT 'f', "up" boolean DEFAULT 'f', "down" boolean DEFAULT 'f', "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170322022941)[0m
+  [1m[35m (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170314164708),
+(20170320155248),
+(20170320162746),
+(20170322003513);
+
+[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "test"], ["created_at", 2017-03-24 03:52:50 UTC], ["updated_at", 2017-03-24 03:52:50 UTC]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.9ms)[0m  [1m[35mALTER TABLE "bets" DISABLE TRIGGER ALL;ALTER TABLE "clients" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "bets"[0m
+  [1m[36mFixture Insert (0.7ms)[0m  [1m[32mINSERT INTO "bets" ("base_price", "created_at", "updated_at", "id") VALUES (9.99, '2017-03-24 03:52:51.144653', '2017-03-24 03:52:51.144653', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bets" ("base_price", "created_at", "updated_at", "id") VALUES (9.99, '2017-03-24 03:52:51.144653', '2017-03-24 03:52:51.144653', 298486374)[0m
+  [1m[36mFixture Delete (1.0ms)[0m  [1m[31mDELETE FROM "clients"[0m
+  [1m[36mFixture Insert (2.8ms)[0m  [1m[32mINSERT INTO "clients" ("bet_address", "client_address", "bet_id", "status", "up", "down", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 1, 'MyString', 'f', 'f', '2017-03-24 03:52:51.158602', '2017-03-24 03:52:51.158602', 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "bets" DISABLE TRIGGER ALL;ALTER TABLE "clients" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bets"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bets" ("base_price", "created_at", "updated_at", "id") VALUES (9.99, '2017-03-24 03:54:43.461074', '2017-03-24 03:54:43.461074', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bets" ("base_price", "created_at", "updated_at", "id") VALUES (9.99, '2017-03-24 03:54:43.461074', '2017-03-24 03:54:43.461074', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "clients"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "clients" ("bet_address", "client_address", "bet_id", "status", "up", "down", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 1, 'MyString', 'f', 'f', '2017-03-24 03:54:43.472186', '2017-03-24 03:54:43.472186', 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "bets" DISABLE TRIGGER ALL;ALTER TABLE "clients" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bets"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bets" ("base_price", "created_at", "updated_at", "id") VALUES (9.99, '2017-03-24 03:55:06.603264', '2017-03-24 03:55:06.603264', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bets" ("base_price", "created_at", "updated_at", "id") VALUES (9.99, '2017-03-24 03:55:06.603264', '2017-03-24 03:55:06.603264', 298486374)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "clients"[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "clients" ("bet_address", "client_address", "bet_id", "status", "up", "down", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 1, 'MyString', 'f', 'f', '2017-03-24 03:55:06.614483', '2017-03-24 03:55:06.614483', 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "bets" DISABLE TRIGGER ALL;ALTER TABLE "clients" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bets"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bets" ("base_price", "created_at", "updated_at", "id") VALUES (9.99, '2017-03-24 03:57:58.844555', '2017-03-24 03:57:58.844555', 980190962)[0m
+  [1m[36mFixture Insert (0.1ms)[0m  [1m[32mINSERT INTO "bets" ("base_price", "created_at", "updated_at", "id") VALUES (9.99, '2017-03-24 03:57:58.844555', '2017-03-24 03:57:58.844555', 298486374)[0m
+  [1m[36mFixture Delete (0.4ms)[0m  [1m[31mDELETE FROM "clients"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "clients" ("bet_address", "client_address", "bet_id", "status", "up", "down", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 1, 'MyString', 'f', 'f', '2017-03-24 03:57:58.857199', '2017-03-24 03:57:58.857199', 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mBet Load (0.3ms)[0m  [1m[34mSELECT  "bets".* FROM "bets" ORDER BY "bets"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mBet Load (0.3ms)[0m  [1m[34mSELECT  "bets".* FROM "bets" ORDER BY "bets"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mBet Load (0.3ms)[0m  [1m[34mSELECT  "bets".* FROM "bets" ORDER BY "bets"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mBet Load (0.3ms)[0m  [1m[34mSELECT  "bets".* FROM "bets" ORDER BY "bets"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mBet Load (0.3ms)[0m  [1m[34mSELECT  "bets".* FROM "bets" ORDER BY "bets"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mBet Load (0.3ms)[0m  [1m[34mSELECT  "bets".* FROM "bets" ORDER BY "bets"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "bets" DISABLE TRIGGER ALL;ALTER TABLE "clients" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "bets"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "bets" ("base_price", "created_at", "updated_at", "id") VALUES (9.99, '2017-03-24 04:20:24.339189', '2017-03-24 04:20:24.339189', 980190962)[0m
+  [1m[36mFixture Insert (0.3ms)[0m  [1m[32mINSERT INTO "bets" ("base_price", "created_at", "updated_at", "id") VALUES (9.99, '2017-03-24 04:20:24.339189', '2017-03-24 04:20:24.339189', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "clients"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "clients" ("bet_address", "client_address", "bet_id", "status", "up", "down", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 1, 'MyString', 'f', 'f', '2017-03-24 04:20:24.348145', '2017-03-24 04:20:24.348145', 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mBet Load (0.3ms)[0m  [1m[34mSELECT  "bets".* FROM "bets" ORDER BY "bets"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "bets" DISABLE TRIGGER ALL;ALTER TABLE "clients" DISABLE TRIGGER ALL;ALTER TABLE "schema_migrations" DISABLE TRIGGER ALL;ALTER TABLE "ar_internal_metadata" DISABLE TRIGGER ALL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mFixture Delete (0.2ms)[0m  [1m[31mDELETE FROM "bets"[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bets" ("base_price", "created_at", "updated_at", "id") VALUES (9.99, '2017-03-24 04:21:27.492576', '2017-03-24 04:21:27.492576', 980190962)[0m
+  [1m[36mFixture Insert (0.2ms)[0m  [1m[32mINSERT INTO "bets" ("base_price", "created_at", "updated_at", "id") VALUES (9.99, '2017-03-24 04:21:27.492576', '2017-03-24 04:21:27.492576', 298486374)[0m
+  [1m[36mFixture Delete (0.3ms)[0m  [1m[31mDELETE FROM "clients"[0m
+  [1m[36mFixture Insert (0.4ms)[0m  [1m[32mINSERT INTO "clients" ("bet_address", "client_address", "bet_id", "status", "up", "down", "created_at", "updated_at", "id") VALUES ('MyString', 'MyString', 1, 'MyString', 'f', 'f', '2017-03-24 04:21:27.498582', '2017-03-24 04:21:27.498582', 980190962)[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m

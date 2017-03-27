@@ -1,19 +1,8 @@
-require 'block_io'
-BlockIo.set_options :api_key=> 'bccd-bae8-44bc-a249', :pin => 'toines2875', :version => 2  
-
 
 # desc "testing"
 # task :bet => :environment do
-# 	@bet_to_test = Bet.last
-# 	i = 0
-# 	while i < @bet_to_test.clients.count do
-# 		balance = BlockIo.get_address_balance :addresses => @bet_to_test.clients[i].bet_address
-# 		if balance["data"]["available_balance"].to_f > 0 || balance["data"]["pending_received_balance"].to_f > 0
-# 			puts "Client #{@bet_to_test.clients[i].id} status needs an update"
-# 		end
-# 		i+=1
-# 	end
-# 	puts "testing done."
+# 	balance = BlockIo.get_address_balance :addresses => "2MtmscXYtobPcEcMH5wF1ErUGa2fs9PcZ2C"
+# 	puts "testing done: #{balance}"
 # end
 
 

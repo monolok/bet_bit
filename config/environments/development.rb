@@ -51,4 +51,11 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  BLOCK_IO_API_KEY = Rails.application.secrets.BLOCK_IO_API_KEY
+  BLOCK_IO_PIN = Rails.application.secrets.BLOCK_IO_PIN
+
+  BlockIo.set_options :api_key=> BLOCK_IO_API_KEY, :pin => BLOCK_IO_PIN, :version => 2  
+
+
 end
