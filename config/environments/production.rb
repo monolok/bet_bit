@@ -83,9 +83,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  BLOCK_IO_API_KEY = Rails.application.secrets.BLOCK_IO_API_KEY
-  BLOCK_IO_PIN = Rails.application.secrets.BLOCK_IO_PIN
-
-  BlockIo.set_options :api_key=> BLOCK_IO_API_KEY, :pin => BLOCK_IO_PIN, :version => 2
 end
