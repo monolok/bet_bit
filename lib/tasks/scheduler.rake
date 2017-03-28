@@ -1,17 +1,19 @@
 
 # desc "testing"
 # task :bet => :environment do
-# 	balance = BlockIo.get_address_balance :addresses => "2MtmscXYtobPcEcMH5wF1ErUGa2fs9PcZ2C"
-# 	puts "testing done: #{balance}"
+
+# 	x = BlockIo.get_network_fee_estimate :amounts => '1', :to_addresses => '2N5EAyoqWsQQVywzWebinoNqRtywTzceJCM'
+
+# 	puts "testing done: #{x}"
 # end
 
 
 
-####################SET MINIMUM BET, network fee + comm + GIT IGNORE FOR ENV DATA
+####################SET MINIMUM BET to 0.01 BTC, network fee + comm
+##### SET FREQUENCY OF BET TO UPDATE CLIENT STATUS (PAID OR NO) AND BET TO CLOSE FOR PAY OUT
 
 
-
-desc "New/close/clean bets (cron: 5 min)"
+desc "New/close/clean bets (cron task)"
 task :bet => :environment do
 	
 	#creating current bet
@@ -50,22 +52,33 @@ task :bet => :environment do
 		@bet_to_close = Bet.find(@bet_to_close_id)
 		if @kraken_btc_eur > @bet_to_close.base_price 
 			@bet_to_close.update(last_price: @kraken_btc_eur, status: "Closed", result: "up")
-		else
+		elsif @kraken_btc_eur < @bet_to_close.base_price
 			@bet_to_close.update(last_price: @kraken_btc_eur, status: "Closed", result: "down")
+		else
+			@bet_to_close.update(last_price: @kraken_btc_eur, status: "Closed", result: "same")
 		end
-		puts "bet #{@bet_to_close_id} closed."
+		puts "bet #{@bet_to_close.id} is #{@bet_to_close.status} with result #{@bet_to_close.result}"
 	else
 		puts "no bet to close."
 	end
 
 	#determine winners and money to payout from the loosers
 	if Bet.exists?(@bet_to_close_id) == true && @bet_to_close.clients.any? == true
-		@winners = @bet_to_close.clients.where("#{@bet_to_close.result}": true, status: true)
-		@loosers = @bet_to_close.clients.where("#{@bet_to_close.result}": false, status: true)
-		if @loosers.count == 0
-			puts "no loosers"
+		#set winners to 0 if bet result is "same"
+		if Bet.find(@bet_to_close_id).result == "same"
+			@winners = []
+			@loosers = []
+			puts "not loosers and no winners"
+		else
+			@winners = @bet_to_close.clients.where("#{@bet_to_close.result}": true, status: true)
+			@loosers = @bet_to_close.clients.where("#{@bet_to_close.result}": false, status: true)
+			puts "Tere are #{@winners.count} winners and #{@loosers.count} loosers"
+		end
+
+		if @loosers.count == 0 && @winners.count != 0
+			puts "no loosers and some winners"
 			i = 0
-			#if no loosers refund each winner
+			#if no loosers and some winners refund each winner
 			while i < @winners.count 
 				balance_hash = BlockIo.get_address_balance :addresses => @winners[i].bet_address
 				balance = balance_hash["data"]["available_balance"].to_f
@@ -73,7 +86,8 @@ task :bet => :environment do
 				i+=1
 				puts "refunding #{balance} to client #{@winners[i].id}"
 			end
-		elsif @winners == 0
+		elsif @winners.count == 0
+			#if no winners do nothing and keep the money
 			puts "no winners"
 		else
 			#sum of bitcoins from all loosers
@@ -101,6 +115,7 @@ task :bet => :environment do
 			end
 			@winners_sum = @win_sum.inject(:+)
 			puts "sum of winners is #{@winners_sum}"
+			puts "summary of winers: #{@funds_winners}"
 
 			#pay out winners based on % of their bet
 			z = 0
@@ -122,14 +137,16 @@ task :bet => :environment do
 			u = 0
 			while u > @bet_to_destroy.clients.count
 				BlockIo.archive_addresses :addresses => "#{@bet_to_destroy.clients[u].bet_address}"
+				puts "BTC address: #{@bet_to_destroy.clients[u].bet_address} archived"
 				u+=1
 			end
 		end
   		#destroy the oldest bet along with its associated clients if any
+  		puts "Destroying Bet #{@bet_to_destroy.id}"
   		@bet_to_destroy.destroy	
   		puts "Table cleaned and related btc address deleted"
   	else
-  		puts "no bet deleted, < 10 bets."
+  		puts "no bet deleted, there are less than 6 bets."
   	end
 #end of task
 end
