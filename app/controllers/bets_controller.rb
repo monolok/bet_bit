@@ -1,13 +1,15 @@
 class BetsController < ApplicationController
 
   def index
+    @kraken = KrakenClient.load
+    @kraken_time = @kraken.public.server_time.rfc1123
   	@bets = Bet.all.order( 'id DESC' )
   	@bet_last = Bet.last
   end
 
   def arrow_up
   	@client_address = params["parameter"]
-  	@client = Client.new
+  	@client = Gambler.new
   	@client.client_address = @client_address
   	@client.bet_id = Bet.last.id
   	@client.up = true
@@ -21,7 +23,7 @@ class BetsController < ApplicationController
 
   def arrow_down
   	@client_address = params["parameter"]
-  	@client = Client.new
+  	@client = Gambler.new
   	@client.client_address = @client_address
   	@client.bet_id = Bet.last.id
   	@client.down = true

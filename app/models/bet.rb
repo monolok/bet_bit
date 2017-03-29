@@ -1,3 +1,3 @@
 class Bet < ApplicationRecord
-	has_many :clients, dependent: :destroy
+	has_many :gamblers, dependent: :destroy
 end

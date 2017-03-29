@@ -19,15 +19,6 @@
 
 $(document).ready(function(){
 
-//server time  
-        $.get('https://api.kraken.com/0/public/Time', function(data){
-            var server_time = data.result//.rfc1123;
-            //$(".kraken_server_time").text(server_time);
-           console.log(server_time);
- 
-        });
-
-
 //ticker kraken API to get new btc/eur value every 2 sec
     var kraken_btc_eur_old = 0;
 
