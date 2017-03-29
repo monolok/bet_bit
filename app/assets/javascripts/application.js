@@ -19,6 +19,15 @@
 
 $(document).ready(function(){
 
+//server time  
+        $.get('https://api.kraken.com/0/public/Time', function(data){
+            var server_time = data.result//.rfc1123;
+            //$(".kraken_server_time").text(server_time);
+           console.log(server_time);
+ 
+        });
+
+
 //ticker kraken API to get new btc/eur value every 2 sec
     var kraken_btc_eur_old = 0;
 
@@ -41,6 +50,8 @@ $(document).ready(function(){
         });
 
     }, 2000);
+
+
 
 //Client checking the status of its bet
     $( "#bet_status" ).click(function() {
@@ -78,46 +89,3 @@ $(document).ready(function(){
     });
 
 });
-
-
-
-
-
-// $.ajax({
-//           type: "POST",
-//           url: "/bets",
-//           data: { parameter: kraken_btc_eur_old },
-//           success: function (data) {
-//             //bets history table updated
-//             if (document.getElementById("bet_loop").children.length > 0 ) {
-//                 $("#bet_loop").prepend("<tr id='bet_" + data.id + "'><th id='data_id'>" + data.id + "</th></tr>");
-//                 $("#bet_" + data.id + "").append("<td id='data_date'>" + data.created_at + "</td>");
-//                 $("#bet_" + data.id + "").append("<td id='data_base_price'>" + data.base_price + "</td>");
-//                 $("#bet_" + data.id + "").append("<td class='kraken_btc_eur'></td>");
-            
-//             } else {
-
-//                 $("#bet_loop").append("<tr id='bet_" + data.id + "'><th id='data_id'>" + data.id + "</th></tr>");
-//                 $("#bet_" + data.id + "").append("<td id='data_date'>" + data.created_at + "</td>");
-//                 $("#bet_" + data.id + "").append("<td id='data_base_price'>" + data.base_price + "</td>");
-//                 $("#bet_" + data.id + "").append("<td class='kraken_btc_eur'></td>");
-//             };
-
-            
-//             //current bet updated
-//             $("#current_bet_id").html(data.id);
-//             $("#current_bet_base_price").html(data.base_price);
-
-//             var counter_bets = document.getElementById("bet_loop").getElementsByTagName("th").length;
-//             var remove_id = data.id - 5;
-//             //logic
-//             if (counter_bets > 5) {
-//                 //removing oldest bet from bets hostory
-//                 $("tr").remove("#bet_" + remove_id);
-//             };
-//            } // end of AJAX success call       
-//         });
-
-
-
-

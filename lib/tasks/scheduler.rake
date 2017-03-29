@@ -9,7 +9,12 @@
 
 
 
-####################SET MINIMUM BET to 0.01 BTC, network fee + comm
+###SET UP KRAKEN GEM
+
+# MINIMUM BET 0.01 BTC
+# Btc network fee is 0.11% apx. with min 0.001
+# Bet_bit fee is 5% of winning funds
+
 ##### SET FREQUENCY OF BET TO UPDATE CLIENT STATUS (PAID OR NO) AND BET TO CLOSE FOR PAY OUT
 
 
@@ -121,10 +126,12 @@ task :bet => :environment do
 			z = 0
 			while z < @winners.count
 				won = (@funds_winners.key(@winners[z].id).to_f / @winners_sum) * @loosers_sum
+				won_less_fee = won - (won * 0.05).to_f
 				winner_bet_hash = BlockIo.get_address_balance :addresses => @winners[z].bet_address
 				winner_bet = winner_bet_hash["data"]["available_balance"].to_f
-				puts "paying #{won} + #{winner_bet} to #{@winners[z].client_address}"
-				BlockIo.withdraw :amounts => "#{won}, #{winner_bet}", :to_addresses => "#{@winners[z].client_address}"
+				puts "paying #{won_less_fee} + #{winner_bet} to #{@winners[z].client_address}"
+				puts "Bet_bit made #{(won * 0.005).to_f} BTC"
+				BlockIo.withdraw :amounts => "#{won_less_fee}, #{winner_bet}", :to_addresses => "#{@winners[z].client_address}"
 				z+=1
 			end
 		end

@@ -32,7 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
-gem 'httparty'
+gem 'kraken_ruby'
 gem "font-awesome-rails"
 gem 'block_io'
 gem 'dotenv-rails', groups: [:development, :test]
