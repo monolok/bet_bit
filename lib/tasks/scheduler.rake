@@ -121,8 +121,10 @@ task :bet => :environment do
 			z = 0
 			while z < @winners.count
 				won = (@funds_winners.key(@winners[z].id).to_f / @winners_sum) * @loosers_sum
-				puts "paying #{won} to #{@winners[z].client_address}"
-				BlockIo.withdraw :amounts => "#{won}", :to_addresses => "#{@winners[z].client_address}"
+				winner_bet_hash = BlockIo.get_address_balance :addresses => @winners[z].bet_address
+				winner_bet = winner_bet_hash["data"]["available_balance"].to_f
+				puts "paying #{won} + #{winner_bet} to #{@winners[z].client_address}"
+				BlockIo.withdraw :amounts => "#{won}, #{winner_bet}", :to_addresses => "#{@winners[z].client_address}"
 				z+=1
 			end
 		end
