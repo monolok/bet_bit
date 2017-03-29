@@ -19,6 +19,11 @@
 
 $(document).ready(function(){
 
+
+//counter before rake tast
+
+
+
 //ticker kraken API to get new btc/eur value every 2 sec
     var kraken_btc_eur_old = 0;
 

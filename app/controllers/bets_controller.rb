@@ -2,8 +2,12 @@ class BetsController < ApplicationController
 
   def index
     @kraken = KrakenClient.load
-    @kraken_time = @kraken.public.server_time.rfc1123
-  	@bets = Bet.all.order( 'id DESC' )
+    @kraken_time = @kraken.public.server_time.rfc1123[0, 14]
+    
+    @kraken_hour = @kraken.public.server_time.rfc1123[15..22]
+    #render json: @kraken_hour
+
+    @bets = Bet.all.order( 'id DESC' )
   	@bet_last = Bet.last
   end
 
