@@ -52,33 +52,55 @@ $(document).ready(function(){
             url: "/status",
             data: { parameter: client_btc_address_status },
             success: function (data) {
-                alert(data.data.available_balance);
+                $("#modal_status").empty();
+                if (data.Bet.status == "Closed") {
+                    $("#modal_status").append("<p>Bet " + data.Bet.id + "is closed</p>");
+                    $("#modal_status").append("<p>Bet result was " + data.Bet.result + " </p>");
+                    if (data.Gambler.up == true) {
+                        $("#modal_status").append("<p>You bet on: up</p>");
+                    }else{
+                        $("#modal_status").append("<p>You bet on: down</p>");
+                    };
+                    if (data.Bet.result == "up" && data.Gambler.up == true) {
+                        $("#modal_status").append("<p>Congratulation, your winning funds are sent</p>");   
+                    }else if (data.Bet.result == "down" && data.Gambler.down == true){
+                        $("#modal_status").append("<p>Congratulation, your winning funds are sent</p>");
+                    }else{
+                        $("#modal_status").append("<p>Hopefully next time...</p>");
+                    };
+                }else{
+                    $("#modal_status").append("<p>Bet still active</p>");
+                    if (data.BlockIo.data.pending_received_balance == 0 && data.BlockIo.data.available_balance == 0 ) {
+                        $("#modal_status").append("<p>You did not bet any Bitcoins</p>");
+                        $("#modal_status").append("<p>Bet number: " + data.Gambler.bet_id + "</p>");
+                        $("#modal_status").append("<p>Winning address: " + data.Gambler.client_address + "</p>");
+                        if (data.Gambler.up == true) {
+                            $("#modal_status").append("<p>You bet on: up</p>");
+                        }else{
+                            $("#modal_status").append("<p>You bet on: down</p>");
+                        };
+
+                    }else{
+                        $("#modal_status").append("<p>Bitcoin sent to: " + client_btc_address_status + "</p>");
+                        if (data.BlockIo.data.available_balance != 0) {
+                            $("#modal_status").append("<p>Your bet is " + data.BlockIo.data.available_balance + " Bitcoins</p>");
+       
+                        };
+                        if (data.BlockIo.data.pending_received_balance != 0) {
+                            $("#modal_status").append("<p>Waiting to receive " + data.BlockIo.data.pending_received_balance + " Bitcoins</p>");
+                        };
+                        $("#modal_status").append("<p>Bet number: " + data.Gambler.bet_id + "</p>");
+                        $("#modal_status").append("<p>Winning address: " + data.Gambler.client_address + "</p>");
+                        if (data.Gambler.up == true) {
+                            $("#modal_status").append("<p>You bet on: up</p>");
+                        }else{
+                            $("#modal_status").append("<p>You bet on: down</p>");
+                        };
+                    };
+                }
             }
         });
     });
-
-
-{
-  "status" : "success",
-  "data" : {
-    "network" : "BTCTEST",
-    "available_balance" : "0.00200000",
-    "pending_received_balance" : "0.00000000",
-    "balances" : [
-      {
-        "user_id" : 26,
-        "label" : "8",
-        "address" : "2MtmscXYtobPcEcMH5wF1ErUGa2fs9PcZ2C",
-        "available_balance" : "0.00200000",
-        "pending_received_balance" : "0.00000000"
-      }
-    ]
-  }
-}
-
-
-
-    
 
 //Client clicking the Arrow up
     $( "#bet_up" ).click(function() {

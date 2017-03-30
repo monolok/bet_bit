@@ -43,9 +43,18 @@ class BetsController < ApplicationController
   def status
     @client_address_status = params["parameter"]
     @status = BlockIo.get_address_balance :addresses => @client_address_status
+    @gambler_id = @status["data"]["balances"][0]["label"]
+    @gambler = Gambler.find(@gambler_id)
+    @gambler_bet = Bet.find(@gambler.bet_id)
+
+    @json_hash = {}
+    @json_hash["BlockIo"] = @status
+    @json_hash["Gambler"] = @gambler
+    @json_hash["Bet"] = @gambler_bet
+
 
     #when AJAX success render json hash of status
-    render json: @status
+    render json: @json_hash
   end
 
 #private
