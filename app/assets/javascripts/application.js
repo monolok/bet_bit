@@ -46,9 +46,39 @@ $(document).ready(function(){
 
 //Client checking the status of its bet
     $( "#bet_status" ).click(function() {
-        var value = document.getElementById("btc_address_status").value;
-        alert(value);
+        var client_btc_address_status = document.getElementById("btc_address_status").value;
+        $.ajax({
+            type: "GET",
+            url: "/status",
+            data: { parameter: client_btc_address_status },
+            success: function (data) {
+                alert(data.data.available_balance);
+            }
+        });
     });
+
+
+{
+  "status" : "success",
+  "data" : {
+    "network" : "BTCTEST",
+    "available_balance" : "0.00200000",
+    "pending_received_balance" : "0.00000000",
+    "balances" : [
+      {
+        "user_id" : 26,
+        "label" : "8",
+        "address" : "2MtmscXYtobPcEcMH5wF1ErUGa2fs9PcZ2C",
+        "available_balance" : "0.00200000",
+        "pending_received_balance" : "0.00000000"
+      }
+    ]
+  }
+}
+
+
+
+    
 
 //Client clicking the Arrow up
     $( "#bet_up" ).click(function() {
