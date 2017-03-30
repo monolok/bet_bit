@@ -11,6 +11,7 @@
 # Bet_bit fee is 5% of winning funds
 
 ##### SET FREQUENCY OF BET TO UPDATE CLIENT STATUS (PAID OR NO) AND BET TO CLOSE FOR PAY OUT
+##every 30 newbet and lockbet
 
 
 desc "New/close/clean bets (cron task)"

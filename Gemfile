@@ -32,7 +32,6 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
-gem 'kraken_client', '~> 1.1.5'
 gem 'httparty'
 gem "font-awesome-rails"
 gem 'block_io'

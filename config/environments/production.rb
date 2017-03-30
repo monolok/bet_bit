@@ -86,13 +86,4 @@ Rails.application.configure do
 
   BlockIo.set_options :api_key=> ENV["API_KEY"], :pin => ENV["PIN"], :version => 2  
 
-  KrakenClient.configure do |config|
-      config.api_key     = ENV['KRAKEN_KEY']
-      config.api_secret  = ENV['KRAKEN_SECRET']
-      config.base_uri    = 'https://api.kraken.com'
-      config.api_version = 0
-      config.limiter     = true
-      config.tier        = 3
-  end
-
 end
