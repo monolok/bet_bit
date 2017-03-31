@@ -3,13 +3,6 @@ class BetsController < ApplicationController
   def index
     @bets = Bet.all.order( 'id DESC' )
   	@bet_last = Bet.last
-
-
-    Time.now.hour
-    Time.now.min 
-    @bet_last.created_at.hour 
-    @bet_last.created_at.min
-
   end
 
   def arrow_up

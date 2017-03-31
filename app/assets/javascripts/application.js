@@ -43,6 +43,18 @@ $(document).ready(function(){
     }, 4000);
 
 
+//bet counter before rake task
+
+    setInterval(function(){
+        var date = new Date;
+        var minutes = 60 - date.getMinutes();
+        var seconds = 60 - date.getSeconds();
+        $("#counter").empty();
+        // if (seconds == 60) {
+        //     minutes = minutes - 1
+        // };
+        $("#counter").append("<span>" + minutes + ":" + seconds + "</span>");
+    }, 1000);
 
 //Client checking the status of its bet
     $( "#bet_status" ).click(function() {
