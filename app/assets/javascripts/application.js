@@ -19,7 +19,7 @@
 
 $(document).ready(function(){
 
-//ticker kraken API to get new btc/eur value every 2 sec
+//ticker kraken API to get new btc/eur value
     var kraken_btc_eur_old = 0;
 
     setInterval(function(){
@@ -42,18 +42,30 @@ $(document).ready(function(){
 
     }, 4000);
 
-
 //bet counter before rake task
-
     setInterval(function(){
         var date = new Date;
         var minutes = 60 - date.getMinutes();
         var seconds = 60 - date.getSeconds();
-        $("#counter").empty();
-        // if (seconds == 60) {
-        //     minutes = minutes - 1
-        // };
-        $("#counter").append("<span>" + minutes + ":" + seconds + "</span>");
+        $(".counter").empty();
+        $(".counter").append("<span>" + minutes + ":" + seconds + "</span>");
+    }, 1000);
+
+//current bet bitcoin bet
+    setInterval(function(){
+        $.ajax({
+            type: "GET",
+            url: "/current_btc",
+            success: function (data) {
+                $("#current_up").empty();
+                $("#current_down").empty();
+                $("#current_total").empty();
+
+                $("#current_up").append("<span>" + data.up + "</span>");
+                $("#current_down").append("<span>" + data.down +  "</span>");
+                $("#current_total").append("<span>" + data.total +  "</span>");                               
+            }
+        });
     }, 1000);
 
 //Client checking the status of its bet
@@ -128,6 +140,7 @@ $(document).ready(function(){
             }
         });
     });
+
 //Client clicking the Arrow down
     $( "#bet_down" ).click(function() {
         var client_btc_address_down = document.getElementById("client_btc_address_down").value;

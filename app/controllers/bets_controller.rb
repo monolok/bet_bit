@@ -50,6 +50,54 @@ class BetsController < ApplicationController
     render json: @json_hash
   end
 
+  def current_btc
+    @current_bet = Bet.last
+    @up = []
+    @down = []
+
+    
+    i = 0
+    while i < @current_bet.gamblers.where.not(bet_address: nil).count do
+      balance = BlockIo.get_address_balance :addresses => @current_bet.gamblers[i].bet_address
+      if balance["data"]["available_balance"].to_f > 0 || balance["data"]["pending_received_balance"].to_f > 0
+        if @current_bet.gamblers[i].up == true
+            @up << balance["data"]["available_balance"].to_f
+            @up << balance["data"]["pending_received_balance"].to_f
+        else
+            @down << balance["data"]["available_balance"].to_f
+            @down << balance["data"]["pending_received_balance"].to_f
+        end
+      end
+      i+=1
+    end
+
+    if @up.empty?
+      @sum_up = 0
+    else
+      @sum_up = @up.inject(:+)
+    end
+    
+    if @down.empty?
+      @sum_down = 0
+    else
+      @sum_down = @down.inject(:+)
+    end
+
+    if @up.empty? && @down.empty?
+      @sum = 0
+    else
+      @sum = @sum_up + @sum_down
+    end
+
+    @sums = {}  
+    @sums["up"] = @sum_up
+    @sums["down"] = @sum_down
+    @sums["total"] = @sum
+
+    render json: @sums
+
+  end
+
 #private
 
 	# def bet_params

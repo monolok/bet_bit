@@ -5,11 +5,10 @@
 			<h1 class="text-success">Bitcoin betting <%= fa_icon "btc"%></h1>
 			<p>
 				1<i class="fa fa-btc" aria-hidden="true"></i> 
-				= <span class="kraken_btc_eur">000.0000<%# @kraken_btc_eur%></span> 
+				= <span class="kraken_btc_eur">000.0000</span> 
 				<i class="fa fa-eur" aria-hidden="true"></i>
 				(kraken.com: <a href="https://www.kraken.com/charts" target="_blank">Charts</a>)
 			</p>
-			<p>Server Time: <%= @kraken_time%></p>
 			<h4 class="click" data-toggle="modal" data-target=".bs-example-modal-sm"><mark>Betting with my bitcoins, how it works ?</mark></h4>		
 		</div>
 		<div class="row pad_1">
@@ -44,11 +43,11 @@
 					<p>base price</p>					
 				</div>
 				<div class="col-xs-3">
-					<h3><span class="kraken_btc_eur"><%# @kraken_btc_eur%></span> <%= fa_icon "eur"%></h3>
+					<h3><span class="kraken_btc_eur">000.0000</span> <%= fa_icon "eur"%></h3>
 					<p>current price</p>					
 				</div>
 				<div class="col-xs-3">
-					<h3 id="counter"></h3>
+					<h3 class="counter"></h3>
 					<p>to end</p>					
 				</div>
 			</div>
@@ -64,14 +63,14 @@
 			<div class="row">
 				<div class="col-xs-4 text-success">
 					<p class="click" data-toggle="modal" data-target=".bs-example-modal-sm3"><%= fa_icon "arrow-up 3x"%></p>
-					<p>12 <%= fa_icon "btc"%></p>
+					<p id="current_up"> <%= fa_icon "btc"%></p>
 				</div>
 				<div class="col-xs-4">
-					<p>Total BTC in the pot: 34 <%= fa_icon "btc"%></p>
-					<p>45 min to end</p>
+					<p id="current_total"> <%= fa_icon "btc"%></p>
+					<p class="counter"></p>
 				</div>
 				<div class="col-xs-4 text-danger">
-					<p>22 <%= fa_icon "btc"%></p>
+					<p id="current_down"> <%= fa_icon "btc"%></p>
 					<p class="click" data-toggle="modal" data-target=".bs-example-modal-sm4"><%= fa_icon "arrow-down 3x"%></p>
 				</div>
 			</div>
@@ -98,7 +97,7 @@
 					<th>Period</th>
 					<th>Base price</th>
 					<th>Last price</th>
-					<th>Sum</th>
+					<th>Result</th>
 					<th>Status</th>
 				</tr>
 			</thead>
@@ -120,7 +119,7 @@
 						<%end%>
 					<%end%>
 					
-					<td>total btc bet <%= fa_icon "btc"%></td>
+					<td><%= bet.result%></td>
 					<td class="<%=bet.status%>"><%= bet.status%></td>
 				</tr>
 <!------------------------ END LOOP ------------------------>
