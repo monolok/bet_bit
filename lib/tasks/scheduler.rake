@@ -11,13 +11,13 @@
 # Bet_bit fee is 5% of winning funds
 
 ##### SET FREQUENCY OF BET TO UPDATE CLIENT STATUS (PAID OR NO) AND BET TO CLOSE FOR PAY OUT
-##every 30 newbet and lockbet
+##every 30minutes newbet and lockbet
 
 
 desc "New/close/clean bets (cron task)"
 task :bet => :environment do
 	
-	#creating current bet
+	#creating current bet at :30
 	puts "creating current bet..."
 	@kraken_btc_eur = HTTParty.get("https://api.kraken.com/0/public/Ticker?pair=XXBTZEUR")["result"]["XXBTZEUR"]["c"][0].to_f.round(2)	
 	@bet = Bet.new
@@ -26,9 +26,9 @@ task :bet => :environment do
 	@bet.save
 	puts "current bet #{@bet.id} created."
 
-	#update client status(paid or not, true/false)
+	#update client status(paid or not, true/false) from previous bet
 	puts "Updating client status..."
-	if Bet.all.count >= 4
+	if Bet.all.count >= 3
 		@bet_to_update_clients_id = (Bet.last.id) - 2
 		@bet_to_update_clients = Bet.find(@bet_to_update_clients_id)
 		#check for clients payments and update their status accordingly
