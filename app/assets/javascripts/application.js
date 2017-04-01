@@ -36,7 +36,7 @@ $(document).ready(function(){
             }
 
             kraken_btc_eur_old = kraken_btc_eur;
-            $(".kraken_btc_eur").text(kraken_btc_eur);
+            $(".kraken_btc_eur").text(parseFloat(kraken_btc_eur).toFixed(2));
 
         });
 
@@ -66,7 +66,7 @@ $(document).ready(function(){
                 $("#current_total").append("<span>" + data.total +  "</span>");                               
             }
         });
-    }, 1000);
+    }, 60000);
 
 //Client checking the status of its bet
     $( "#bet_status" ).click(function() {
