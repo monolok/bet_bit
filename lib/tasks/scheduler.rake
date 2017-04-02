@@ -9,15 +9,13 @@
 # MINIMUM BET 0.01 BTC
 # Btc network fee is 0.11% apx. with min 0.001 (occur 2 times max)
 # Bet_bit fee is 5% of winning funds
-
-##### SET FREQUENCY OF BET TO UPDATE CLIENT STATUS (PAID OR NO) AND BET TO CLOSE FOR PAY OUT
-##every 30minutes newbet and lockbet
+# Payout takes 2 hours
 
 
 desc "New/close/clean bets (cron task)"
 task :bet => :environment do
 	
-	#creating current bet at :30
+	#creating current bet at :00
 	puts "creating current bet..."
 	@kraken_btc_eur = HTTParty.get("https://api.kraken.com/0/public/Ticker?pair=XXBTZEUR")["result"]["XXBTZEUR"]["c"][0].to_f.round(2)	
 	@bet = Bet.new
@@ -26,11 +24,13 @@ task :bet => :environment do
 	@bet.save
 	puts "current bet #{@bet.id} created."
 
-	#update client status(paid or not, true/false) from previous bet
-	puts "Updating client status..."
+	#Action on the previous bet: update client status(paid or not) and close the bet with its result
+	puts "Updating client status and closing bet..."
 	if Bet.all.count >= 3
-		@bet_to_update_clients_id = (Bet.last.id) - 2
+		@bet_to_update_clients_id = (Bet.last.id) - 1
 		@bet_to_update_clients = Bet.find(@bet_to_update_clients_id)
+		@bet_to_close_id = (Bet.last.id) - 2
+		@bet_to_close = Bet.find(@bet_to_close_id)		
 		#check for clients payments and update their status accordingly
 		i = 0
 		while i < @bet_to_update_clients.gamblers.count do
@@ -42,27 +42,19 @@ task :bet => :environment do
 			i+=1
 		end
 		puts "clients status updated from bet #{@bet_to_update_clients.id}."
+		#closing bet with its result and updated status	
+		if @kraken_btc_eur > @bet_to_update_clients.base_price 
+			@bet_to_update_clients.update(last_price: @kraken_btc_eur, status: "Closed", result: "up")
+		elsif @kraken_btc_eur < @bet_to_update_clients.base_price
+			@bet_to_update_clients.update(last_price: @kraken_btc_eur, status: "Closed", result: "down")
+		else
+			@bet_to_update_clients.update(last_price: @kraken_btc_eur, status: "Closed", result: "same")
+		end
+		puts "bet #{@bet_to_update_clients.id} is #{@bet_to_update_clients.status} with result #{@bet_to_update_clients.result}"
 	else
-		puts "no bet with clients to update."
+		puts "no bet with clients to update or bet to close."
 	end
 		
-	#closing bet with its result and updated status
-	puts "closing bet..."
-	if Bet.all.count >= 4
-		@bet_to_close_id = (Bet.last.id) - 3
-		@bet_to_close = Bet.find(@bet_to_close_id)
-		if @kraken_btc_eur > @bet_to_close.base_price 
-			@bet_to_close.update(last_price: @kraken_btc_eur, status: "Closed", result: "up")
-		elsif @kraken_btc_eur < @bet_to_close.base_price
-			@bet_to_close.update(last_price: @kraken_btc_eur, status: "Closed", result: "down")
-		else
-			@bet_to_close.update(last_price: @kraken_btc_eur, status: "Closed", result: "same")
-		end
-		puts "bet #{@bet_to_close.id} is #{@bet_to_close.status} with result #{@bet_to_close.result}"
-	else
-		puts "no bet to close."
-	end
-
 	#determine winners and money to payout from the loosers
 	if Bet.exists?(@bet_to_close_id) == true && @bet_to_close.gamblers.any? == true
 		#set winners to 0 if bet result is "same"
@@ -141,8 +133,12 @@ task :bet => :environment do
 		if @bet_to_destroy.gamblers.count > 0
 			u = 0
 			while u > @bet_to_destroy.gamblers.count
-				BlockIo.archive_addresses :addresses => "#{@bet_to_destroy.gamblers[u].bet_address}"
-				puts "BTC address: #{@bet_to_destroy.gamblers[u].bet_address} archived"
+				balance_hash = BlockIo.get_address_balance :addresses => @bet_to_destroy.gamblers[u].bet_address
+				balance = balance_hash["data"]["available_balance"].to_f
+				if not balance > 0
+					BlockIo.archive_addresses :addresses => @bet_to_destroy.gamblers[u].bet_address
+					puts "BTC address: #{@bet_to_destroy.gamblers[u].bet_address} archived"					
+				end
 				u+=1
 			end
 		end
