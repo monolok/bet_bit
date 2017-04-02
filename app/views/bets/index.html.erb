@@ -139,71 +139,50 @@
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
+		<dl class="center_arrows">
+	  		<dt>
+				<p class="text-primary">What is BitBit, bet on the hour (Bitcoin Betting)?</p>		  	
+	  		</dt>
+	  		<dd>
+	  			It’s a website where Bitcoin exchange rate against EUR is used so that you to bet on its value going up or down by the end of the current hour. The exchange rate is retrieved from <a href="https://www.kraken.com/charts" target="_blank">Kraken.com</a>.
+	  		</dd>
+	  		<dt>
+				<p class="text-primary">Brief description</p>		  	
+	  		</dt>
+	  		<dd>
+				Every hour, the BTC/EUR exchange rate is fixed at the last price (base price), and you can bet on the rise or fall of the exchange rate in relation to the base price. After the hour interval, the bet is closed, and a new hour bet acceptance period with a new base price begins.
+				After the betting period is over, the BTC/EUR exchange rate is fixed at the last price, and the drawing is made. If you placed an up bet and the price went up, you will receive a prize as a percentage of your bet to the total amount of up bets. In this case, the prize pool is the sum of all down bets. The same algorithm is applied to down bets, but vice versa. After the Bet is closed, it takes 2 hours to receive your winning funds.
 
-# MINIMUM BET 0.01 BTC
-# Btc network fee is 0.11% apx. with min 0.001 (occur 2 times max)
-# Bet_bit fee is 5% of winning funds
-# Payout takes 2 hours
+	  		</dd>
+	  		<dt>
+				<p class="text-primary">Some rules to have in mind:</p>		  	
+	  		</dt>
+	  		<dd>
+	  			<ul>
+	  			 	<li>Minimum bet is 0.01 BTC</li>
+	  			 	<li>BitBit take 5% service commision on your winning funds</li>
+	  			 	<li>Do not bet after the bet is closed</li>
+	  			 	<li>Take into account bitcoin network fees</li>
+	  			 	<li>If no winners; all loosers are refunded and vice versa</li>
+	  			 	<li>If the BTC/EUR value remained the same after the bet close, everyone get refunded</li>
+	  			 </ul> 
+	  		</dd>
+	  		<dt>
+				<p class="text-primary">Checking your bet status</p>		  	
+	  		</dt>
+	  		<dd>
+				The Bitcoin address address generated to fund your bet can be used to check your bet status and to track your payout.
 
-What is Bitcoin Betting?
-It’s a totalizator where Bitcoin exchange rate against USD is used. 
-
-Brief description of Bitcoin Betting
-Every 5 minutes, the BTC/USD exchange rate is fixed at the last price (base price), and you can bet on the rise or fall of the exchange rate in relation to the base price. After the 5-minute interval, the bets are closed, and a new 5-minute bet acceptance period with a new base price begins.
-After the betting period is over, the waiting stage of the drawing begins. It lasts 5 minutes. If there are enough participants, the drawing is made after 15 minutes of waiting. At this stage, the BTC/USD exchange rate is also fixed at the last price, and the drawing is made. If you placed an up bet and the price went up, you will receive a prize as a percentage of your bet to the total amount of up bets. In this case, the prize pool is the sum of all down bets. The same algorithm is applied to down bets, but vice versa.
-
-1.1 Interface
-The interface consists of the Current bets section and the Past bets table.
-
-1.1.1 Current bets
-id (1) – unique drawing number
-base price (981.101) – this price is fixed at the last price at the beginning of each drawing
-current price (981.201) – the current price changes according to the last price in real time
-up bet (0 BTC) – the sum of all up bets
-down bet (0 BTC) – the sum of all down bets
-remaining time (5 min) – time until the end of the betting period, when bets are accepted
-
-- Bets are only accepted in the active drawing in the Current bets section.
-- The minimum bet amount is 0.01 BTC.
-- The maximum betting amount in both directions is 10 BTC.
-- You can simultaneously place up and down bets, but in this case you should note that your balance can decrease by 5% (prize fee) and become negative.
-- All your bets for the current drawing are displayed in the Your current bets section.
-- At the end of the betting period, the current drawing goes into the waiting stage. You can see it in the Past bets table. 
-- You CAN NOT CANCEL your current bets.
-
-1.1.2 Past bets
-id – unique drawing number
-period – drawing start, end of the period when bets are accepted, drawing end
-base price – this price is fixed at the last price at the beginning of each drawing
-current price – the current price changes according to the last price
-bets count – the number of all bets, the number of all up bets, the number of all down bets
-sum – the sum of all bets, the sum of all up bets, the sum of all down bets
-
-1.1.3 Statuses of past periods
-active – bets are being accepted
-waiting – the winner of the drawing is being determined
-ended – the drawing ended, and the prize pool was distributed
-canceled – the drawing was canceled due to lack of participants or if the base price was equal to the last price
-
-1.2 Drawing
-- Provided that there were no bets in the drawing, the drawing is canceled.
-- Provided that the bets were placed only in one direction (only up or only down bets), the drawing is canceled, and all bets are automatically refunded on the user accounts without any commission.
-- If the condition of placing at least one bet in both directions by the end of the betting period is fulfilled, the drawing enters the stage of price fixing.
-- The determination of winners is done by fixing the last price at the end of the drawing time.
-- Prize money is automatically distributed on the winner’s accounts.
-- The calculation of the prize pool is done automatically depending on the bet amount in percentage correlation.
-- The commission is 5% of the prize amount. It is calculated and automatically deducted from the prize amount.
-
-1.3 Description of transactions in transaction history
-- betting (transaction relates to the Bitcoin Betting section), period#1 (unique drawing number), bet#1 (unique bet number in the drawing) up bet (bet direction: up bet (in this case) or down bet), base price 985.998 (base price)
-
-- betting (transaction relates to the Bitcoin Betting section), period#1 (unique drawing number), *** ("win", or "not enough players", or "last price equal to base price") refund (bet refund in the case of a win or if the drawing was not made), bet#1 (unique bet number in the drawing)
-
-- betting (transaction relates to the Bitcoin Betting section), period#1 (unique drawing number), prize 0.01 BTC (prize amount) -5% fee. (service commission) prize pool 0.01 BTC (prize pool) (100%) (the percentage of your bet to the total sum of bets)
-
-We wish you good luck in Bitcoin Betting!
-Best Regards,
-BTC-e Team
+	  		</dd>	  		
+	  		<dt>
+				<p class="text-primary">Example in action for better understanding:</p>		  	
+	  		</dt>
+	  		<dd>
+	  			Let's say you bet 0.04 btc on up. The base price of the bet is 1000€ and at closing it went up to 1020€, thus you win. The total of bitcoins that were bet on up was 0.20 and those bet on down was 0.80. Therefore, your bet was accounting for 20% of the bitcoins bet on up: (0.04/0.20)*100 (the percentage of your bet to the total sum of the same bet outcome).
+	  			The total of bitcoins bet on down was 0.80, hence you win 20% of the 0.8 which is 0.16.
+	  			From the 0.16 you will be discounted 5% of service commission which will take your net winning fund to 0.152.
+	  		</dd>	  			  		
+		</dl>
     </div>
   </div>
 </div>

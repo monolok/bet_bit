@@ -68,10 +68,10 @@ task :bet => :environment do
 			puts "Tere are #{@winners.count} winners and #{@loosers.count} loosers"
 		end
 
-		if @loosers.count == 0 && @winners.count != 0
-			puts "no loosers and some winners"
+		if @loosers.count == 0 && @winners.count != 0 || @loosers.count != 0 && @winners.count == 0
+			puts "no loosers and some winners or vice versa"
 			i = 0
-			#if no loosers and some winners refund each winner
+			#if no loosers and some winners or vice versa proceed to refund
 			while i < @winners.count 
 				balance_hash = BlockIo.get_address_balance :addresses => @winners[i].bet_address
 				balance = balance_hash["data"]["available_balance"].to_f
@@ -79,9 +79,6 @@ task :bet => :environment do
 				i+=1
 				puts "refunding #{balance} to client #{@winners[i].id}"
 			end
-		elsif @winners.count == 0
-			#if no winners do nothing and keep the money
-			puts "no winners"
 		else
 			#sum of bitcoins from all loosers
 			i = 0
@@ -117,9 +114,13 @@ task :bet => :environment do
 				won_less_fee = won - (won * 0.05).to_f
 				winner_bet_hash = BlockIo.get_address_balance :addresses => @winners[z].bet_address
 				winner_bet = winner_bet_hash["data"]["available_balance"].to_f
-				puts "paying #{won_less_fee} + #{winner_bet} to #{@winners[z].client_address}"
-				puts "Bet_bit made #{(won * 0.005).to_f} BTC"
-				BlockIo.withdraw :amounts => "#{won_less_fee}, #{winner_bet}", :to_addresses => "#{@winners[z].client_address}"
+				if winner_bet >= 0.01 
+					puts "paying #{won_less_fee} + #{winner_bet} to #{@winners[z].client_address}"
+					puts "Bet_bit made #{(won * 0.005).to_f} BTC"
+					BlockIo.withdraw :amounts => "#{won_less_fee}, #{winner_bet}", :to_addresses => "#{@winners[z].client_address}"	
+				else
+					puts "Gambler #{@winners[z].id} has bet #{winner_bet} which is less than 0.01 "
+				end
 				z+=1
 			end
 		end

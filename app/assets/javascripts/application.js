@@ -137,6 +137,7 @@ $(document).ready(function(){
                 $("#arrow_up_btc").empty();
                 $("#arrow_up_btc").append("<p>Winning funds will be send to:" + client_btc_address_up + "</p>");
                 $("#arrow_up_btc").append("<p>Send your bet to:" + data.bet_address + "</p>");
+                $("#arrow_up_btc").append("<p>MINIMUM BET IS 0.01 BTC</p>");
             }
         });
     });
@@ -152,6 +153,8 @@ $(document).ready(function(){
                 $("#arrow_down_btc").empty();
                 $("#arrow_down_btc").append("<p>Winning funds will be send to:" + client_btc_address_down + "</p>");
                 $("#arrow_down_btc").append("<p>Send your bet to:" + data.bet_address + "</p>");
+                $("#arrow_down_btc").append("<p>MINIMUM BET IS 0.01 BTC</p>");
+
             }
         });
     });
