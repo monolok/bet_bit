@@ -86,4 +86,16 @@ Rails.application.configure do
 
   BlockIo.set_options :api_key=> ENV["API_KEY"], :pin => ENV["PIN"], :version => 2  
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "ex.com",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_PASSWORD"]
+  }
+  config.action_mailer.default_url_options = {host: "betbit.com"}
+
 end

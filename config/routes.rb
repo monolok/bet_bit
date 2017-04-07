@@ -4,4 +4,5 @@ Rails.application.routes.draw do
 	get "/down", to: "bets#arrow_down"
 	get "/status", to: "bets#status"
 	get "/current_btc", to: "bets#current_btc"
+	post "/send", to: "bets#sending"
 end
