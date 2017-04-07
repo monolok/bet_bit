@@ -71,6 +71,8 @@ $(document).ready(function(){
 //Client checking the status of its bet
     $( "#bet_status" ).click(function() {
         var client_btc_address_status = document.getElementById("btc_address_status").value;
+        $("#modal_status").empty();
+        $("#modal_status").append("<div class='loader'></div>");
         $.ajax({
             type: "GET",
             url: "/status",
@@ -97,7 +99,7 @@ $(document).ready(function(){
                     if (data.BlockIo.data.pending_received_balance == 0 && data.BlockIo.data.available_balance == 0 ) {
                         $("#modal_status").append("<p>You did not bet any Bitcoins</p>");
                         $("#modal_status").append("<p>Bet number: " + data.Gambler.bet_id + "</p>");
-                        $("#modal_status").append("<p>Winning address: " + data.Gambler.client_address + "</p>");
+                        $("#modal_status").append("<p>Winning address: </p><p><mark>" + data.Gambler.client_address + "</mark></p>");
                         if (data.Gambler.up == true) {
                             $("#modal_status").append("<p>You bet on: up</p>");
                         }else{
@@ -129,15 +131,17 @@ $(document).ready(function(){
 //Client clicking the Arrow up
     $( "#bet_up" ).click(function() {
         var client_btc_address_up = document.getElementById("client_btc_address_up").value;
+        $("#arrow_up_btc").empty();
+        $("#arrow_up_btc").append("<div class='loader'></div>");
         $.ajax({
             type: "GET",
             url: "/up",
             data: { parameter: client_btc_address_up },
             success: function (data) {
                 $("#arrow_up_btc").empty();
-                $("#arrow_up_btc").append("<p>Winning funds will be send to:" + client_btc_address_up + "</p>");
-                $("#arrow_up_btc").append("<p>Send your bet to:" + data.bet_address + "</p>");
-                $("#arrow_up_btc").append("<p>MINIMUM BET IS 0.01 BTC</p>");
+                $("#arrow_up_btc").append("<p class='text-success'>Winning funds will be send to:</p><mark>"+ client_btc_address_up +"</mark>");
+                $("#arrow_up_btc").append("<p class='text-success pad-top'>Send your bet to:</p><mark>" + data.bet_address + "</mark>");
+                $("#arrow_up_btc").append("<p class='text-danger pad-top'>MINIMUM BET IS 0.01 BTC</p>");
             }
         });
     });
@@ -145,15 +149,17 @@ $(document).ready(function(){
 //Client clicking the Arrow down
     $( "#bet_down" ).click(function() {
         var client_btc_address_down = document.getElementById("client_btc_address_down").value;
+        $("#arrow_down_btc").empty();
+        $("#arrow_down_btc").append("<div class='loader'></div>");
         $.ajax({
             type: "GET",
             url: "/down",
             data: { parameter: client_btc_address_down },
             success: function (data) {
                 $("#arrow_down_btc").empty();
-                $("#arrow_down_btc").append("<p>Winning funds will be send to:" + client_btc_address_down + "</p>");
-                $("#arrow_down_btc").append("<p>Send your bet to:" + data.bet_address + "</p>");
-                $("#arrow_down_btc").append("<p>MINIMUM BET IS 0.01 BTC</p>");
+                $("#arrow_down_btc").append("<p class='text-success'>Winning funds will be send to:</p><mark>"+ client_btc_address_up +"</mark>");
+                $("#arrow_down_btc").append("<p class='text-success pad-top'>Send your bet to:</p><mark>" + data.bet_address + "</mark>");
+                $("#arrow_down_btc").append("<p class='text-danger pad-top'>MINIMUM BET IS 0.01 BTC</p>");
 
             }
         });
